@@ -8,18 +8,18 @@ def children(branch, depth, alpha, beta):
     for child in branch:
         if isinstance(child, list):
             (nalpha, nbeta) = children(child, depth + 1, alpha, beta)
-            if depth % 2 == 1:  # Minimizer's turn
+            if depth % 2 == 1:
                 beta = min(beta, nalpha)
-            else:  # Maximizer's turn
+            else:
                 alpha = max(alpha, nbeta)
             branch[i] = alpha if depth % 2 == 0 else beta
             i += 1
         else:
-            if depth % 2 == 0:  # Maximizer's turn
+            if depth % 2 == 0:
                 alpha = max(alpha, child)
-            else:  # Minimizer's turn
+            else:
                 beta = min(beta, child)
-            if alpha >= beta:  # Prune the branch
+            if alpha >= beta:
                 pruned += 1
                 break
 

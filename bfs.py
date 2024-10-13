@@ -7,11 +7,11 @@ graph = {
     'F': set(['C', 'E'])
 }
 
-# Implement Logic of BFS
+
 def bfs(start):
     queue = [start]
-    levels = {}  # This Dictionary Keeps track of levels
-    levels[start] = 0  # Depth of start node is 0
+    levels = {}  
+    levels[start] = 0  
     visited = set(start)
 
     while queue:
@@ -23,12 +23,12 @@ def bfs(start):
                 visited.add(neighbor)
                 levels[neighbor] = levels[node] + 1
 
-    print(levels)  # Print graph level
+    print(levels)
     return visited
 
-print(str(bfs('A')))  # Print graph node
+print(str(bfs('A'))) 
 
-# For Finding Breadth First Search Path
+
 def bfs_paths(graph, start, goal):
     queue = [(start, [start])]
     while queue:
@@ -40,9 +40,9 @@ def bfs_paths(graph, start, goal):
                 queue.append((next, path + [next]))
 
 result = list(bfs_paths(graph, 'A', 'F'))
-print(result)  # [['A', 'C', 'F'], ['A', 'B', 'E', 'F']]
+print(result)  
 
-# For finding shortest path
+
 def shortest_path(graph, start, goal):
     try:
         return next(bfs_paths(graph, start, goal))
@@ -50,4 +50,4 @@ def shortest_path(graph, start, goal):
         return None
 
 result1 = shortest_path(graph, 'A', 'F')
-print(result1)  # ['A', 'C', 'F']
+print(result1)  

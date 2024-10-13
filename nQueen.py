@@ -7,9 +7,9 @@ class QueenChessBoard:
         self.columns.append(column)
 
     def remove_in_current_row(self):
-        if self.columns:  # Check if columns list is not empty
+        if self.columns:  
             return self.columns.pop()
-        return None  # Return None if there are no columns to remove
+        return None 
 
     def is_this_column_safe_in_next_row(self, column):
         row = len(self.columns)
@@ -31,7 +31,7 @@ class QueenChessBoard:
                     print('Q', end=' ')
                 else:
                     print('. ', end=' ')
-            print()  # Newline after each row
+            print() 
 
 def solve_queen(size):
     board = QueenChessBoard(size)
@@ -54,10 +54,10 @@ def solve_queen(size):
                 board.display()
                 print()
                 number_of_solutions += 1
-            # Backtrack
+
             row -= 1
             if row < 0:
-                break  # Exit if we've gone past the first row
+                break  
             prev_column = board.remove_in_current_row()
             column = 1 + prev_column if prev_column is not None else 0  # Move to the next column
 

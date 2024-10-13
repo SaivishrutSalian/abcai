@@ -7,5 +7,5 @@ def moveTower(height, fromPole, toPole, withPole):
 def moveDisk(fp, tp):
     print("Moving disk from", fp, "to", tp)
 
-# Initiate the Tower of Hanoi solution with 3 disks
+
 moveTower(3, "A", "B", "C")

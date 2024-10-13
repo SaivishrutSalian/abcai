@@ -22,7 +22,7 @@ constraints = [
 
 my_problem = CspProblem(variables, domains, constraints)
 
-# Solving the problem with different heuristics
+
 print("Solution without heuristics:")
 print(backtrack(my_problem))
 
