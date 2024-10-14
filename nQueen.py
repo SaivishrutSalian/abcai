@@ -1,67 +1,54 @@
-class QueenChessBoard:
-    def __init__(self, size):
-        self.size = size
-        self.columns = []
+def is_safe(board, row, col, n):
+    
+    # condition 1 -> checking previous columns
+    for i in range(col):
+        if board[row][i] == 1:
+            return False
+        
+    # condition 2 -> checking upper diagonal ( ofc left )
+    for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
 
-    def place_in_next_row(self, column):
-        self.columns.append(column)
+    # condition 3 -> checking lower diagonal ( ofc left )
+    for i, j in zip(range(row, n), range(col, -1, -1)):
+        if board[i][j] == 1:
+            return False
 
-    def remove_in_current_row(self):
-        if self.columns:  
-            return self.columns.pop()
-        return None 
+    
+    return True
 
-    def is_this_column_safe_in_next_row(self, column):
-        row = len(self.columns)
-        for queen_column in self.columns:
-            if column == queen_column:
-                return False
-        for queen_row, queen_column in enumerate(self.columns):
-            if queen_column - queen_row == column - row:
-                return False
-        for queen_row, queen_column in enumerate(self.columns):
-            if (self.size - queen_column) - queen_row == (self.size - column) - row:
-                return False
+def solve_n_queens(board, col, n):
+
+    if col >= n:
         return True
+    
+    for row in range(n):
+        if is_safe(board, row, col, n):
+            board[row][col] = 1
+            if solve_n_queens(board, col+1, n):
+                return True
 
-    def display(self):
-        for row in range(self.size):
-            for column in range(self.size):
-                if column == self.columns[row]:
-                    print('Q', end=' ')
-                else:
-                    print('. ', end=' ')
-            print() 
+            board[row][col] = 0
+    return False
 
-def solve_queen(size):
-    board = QueenChessBoard(size)
-    number_of_solutions = 0
-    row = 0
-    column = 0
+# ofc to print board and to flex
+def print_board(board):
+    for row in board:
+        print(row)
 
-    while True:
-        while column < size:
-            if board.is_this_column_safe_in_next_row(column):
-                board.place_in_next_row(column)
-                row += 1
-                column = 0
-                break
-            else:
-                column += 1
+# start func -> to create board list and other stuff
+def start(n):
 
-        if column == size or row == size:
-            if row == size:
-                board.display()
-                print()
-                number_of_solutions += 1
+    # creating board to flex
+    board = [[0] * n for _ in range(n)]
 
-            row -= 1
-            if row < 0:
-                break  
-            prev_column = board.remove_in_current_row()
-            column = 1 + prev_column if prev_column is not None else 0  # Move to the next column
+    if solve_n_queens(board, 0, n):
+        print_board(board)
 
-    print('Number of solutions:', number_of_solutions)
+    else:
+        print("No solution exists!")
 
-n = int(input('Enter n: '))
-solve_queen(n)
+n = 4
+start(n)
+
