@@ -1,0 +1,134 @@
+b) Write a program in prolog to find factorial of 
+given number. Example:- 5!= 5*4*3*2*1=120
+
+Code:-
+factorial(0,1).
+factorial(N, Result):- N>0, N1 is N-1, factorial(N1, Result1), Result is N * Result1.
+
+Output:-
+? factorial(6, Result).
+Result= 720.
+
+c) Write a program in prolog to illustrate whether two numbers or variables are equal or not?
+
+Code:-
+equal(X,X).
+
+Output:-
+? equal(2,2).
+true
+
+?equal(a, a).
+true
+
+?equal(3,2).
+false
+
+d) Write a program in prolog to add two numbers and display its result in another variables.
+
+Code:-
+add(X,Y,Z):- Z is X+Y.
+
+Output:-
+? add(2, 3, Result).
+Result=5.
+
+?add(5,7,Answer).
+Answer=12.
+-----------------------------------------------------
+e) Write a program in prolog to check whether an element is present in the list or not.
+
+Code:-
+member(X, [X|_]).
+member(X, [_|T]):- member(X,T).
+
+Output:-
+---------
+? member(3, [1, 2, 3]).
+true.
+
+? member(4, [1, 2, 3]).
+false.
+
+Note:-
+member(X, LIST) IS A predicate that checks if an element X is a member of list.
+--------------------------------------------------
+f) Write a program in prolog for illustrating the concept of Family tree relationship.
+
+Code:-
+parent(john,mary).
+parent(john,tom).
+parent(mary,ann).
+parent(mary, bob).
+female(mary).
+female(ann).
+male(john).
+male(tom).
+male(bob).
+mother(X,Y):-parent(X,Y), female(X).
+father(X,Y):-parent(X,Y), male(X).
+sister(X,Y):-parent(Z,X),parent(Z,Y), female(X), X \==Y.
+brother(X,Y):-parent(Z,X),parent(Z,Y),male(X), 
+X \==Y.
+
+output:-
+? mother(mary, ann).
+true.
+?father(john, tom).
+true
+?father(john, bob).
+false
+?sister(ann, bob).
+true.
+?brother(tom, ann).
+false
+?brother(bob,ann).
+true.
+
+Note:- Explantation:-
+we have created a family tree relationship:- parent, female, male.
+define derived relationships: mother, father, brother & sister.
+\== is used to ensure sibilings are different individuals.
+
+output:-
+? mother(mary, ann).
+true.
+?father(john, tom).
+true
+?father(john, bob).
+false
+?sister(ann, bob).
+true.
+?brother(tom, ann).
+false
+?brother(bob,ann).
+true.
+----------------------------------------------------
+
+f) Write a program in prolog to check whether the entered number is even or odd?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
